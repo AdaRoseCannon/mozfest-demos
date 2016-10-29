@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="cleartype" content="on">
+	<meta name="MobileOptimized" content="width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+	<meta name="HandheldFriendly" content="true">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@lady_ada_king">
+	<meta name="description" content="A-Frame Anti Gravity Demo">
+	<meta name="twitter:title" content="A-Frame Gravity">
+	<meta name="twitter:description" content="A-Frame Anti Gravity Demo">
+	<meta name="twitter:url" content="/">
+	<title>A-Frame Gravity</title>
+	<script src="libs/aframe-physics-system.js"></script>
+	<script src="libs/aframe.min.js"></script>
+	<script src="libs/aframe-extras.controls.min.js"></script>
+</head>
+<body>
+	<a-scene physics="gravity: 0;">
+
+		<!-- Camera has a cylinder around it so stuff bounces off -->
+		<a-camera universal-controls>
+			<a-entity
+				  static-body
+				  geometry="primitive: cylinder; height: 1.8; segmentsRadial: 8; segmentsHeight: 1;"
+			></a-entity>
+		</a-camera>
+
+		<a-assets>
+			<img src="images/grid.png" id="grid" crossorigin="anonymous">
+		</a-assets>
+
+		<!-- The javascript fills this with 20 boxes -->
+		<a-entity id="boxes"></a-entity>
+
+		<!-- WALLS -->
+		<a-entity position="0 4 0" rotation="90 0 0" static-body geometry="primitive: plane; width: 100; height: 100;" material="color: hsl(0, 90%, 30%);"></a-entity>
+		<a-entity position="0 0 4" rotation="0 180 0" static-body geometry="primitive: plane; width: 100; height: 100;" material="color: hsl(114, 90%, 30%);"></a-entity>
+		<a-entity position="0 0 -4" rotation="0 0 0" static-body geometry="primitive: plane; width: 100; height: 100;" material="color: hsl(201, 90%, 30%);"></a-entity>
+		<a-entity position="-6 0 0" rotation="0 90 0" static-body geometry="primitive: plane; width: 100; height: 100;" material="color: hsl(258, 90%, 30%);"></a-entity>
+		<a-entity position="6 0 0" rotation="0 -90 0" static-body geometry="primitive: plane; width: 100; height: 100;" material="color: hsl(320, 90%, 30%);"></a-entity>
+		<a-entity position="0 0 0" rotation="-90 0 0" static-body geometry="primitive: plane; width: 100; height: 100;" material="src: #grid; repeat: 100 100;"></a-entity>
+	</a-scene>
+
+	<script>
+
+		// Wait for the scene to load then add the boxes
+		var scene = document.querySelector('a-scene');
+		if (scene.hasLoaded) {
+			addBoxes();
+		} else {
+			scene.addEventListener('loaded', addBoxes);
+		}
+
+		function addBoxes() {
+			var boxesLoc = document.querySelector('#boxes');
+
+			// Add many boxes
+			var boxes = '';
+			for (var i=0; i<25; i++) {
+				boxes = boxes + '<a-box width="0.5" height="0.5" depth="0.5" position="' + (-5 + Math.random() * 10) + ' '  + (1 + Math.random() * 1.5) + ' ' + (-3 + Math.random() * 6) + ' ' + '" dynamic-body material="color: hsl(' + (Math.random() * 360) + ', 90%, 70%);"></a-box>';
+			}
+			boxesLoc.innerHTML = boxes;
+		}
+
+		// Keep the camera in the room
+		AFRAME.registerSystem('contain-camera', {
+			tick: function containCamera() {
+				var p = scene.camera.parent.position;
+				if (p.x <= -5.95) p.x = -5.9;
+				if (p.x >= 5.95) p.x = 5.9;
+				if (p.z <= -3.95) p.z = -3.9;
+				if (p.z >= 3.95) p.z = 3.9;
+			}
+		});
+	</script>
+</body>
+</html>

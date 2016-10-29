@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>360 Video</title>
+	<script src="libs/aframe.min.js"></script>
+</head>
+<body>
+	<a-scene>
+
+		<a-assets>
+			<video src="https://vid.ada.is/mt2.webm" id="my-vid"></video>
+		</a-assets>
+
+		<a-sky src="#my-vid"></a-sky>
+	</a-scene>
+</body>
+</html>

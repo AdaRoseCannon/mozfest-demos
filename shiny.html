@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Berlin 360</title>
+	<script src="libs/aframe.min.js"></script>
+</head>
+<body>
+	<a-scene>
+		<a-assets>
+			<img id="sky" src="images/berlin.jpg" crossorigin="anonymous" />
+		</a-assets>
+		<a-entity geometry="primitive: torusKnot;" position="0 1 -5" material="color: pink; metalness:0.8; roughness: 0.2; sphericalEnvMap: #sky;">
+			<a-animation easing="linear" attribute="rotation" dur="10000" to="0 0 360" repeat="indefinite"></a-animation>
+		</a-entity>
+
+		<a-sky src="#sky" radius="15"></a-sky>
+	</a-scene>
+</body>
+</html>
