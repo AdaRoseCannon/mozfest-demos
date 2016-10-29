@@ -32,10 +32,10 @@ minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <body>
 	<a-scene screenshot physics="debug: false; friction: 0.1; restitution: 0.25;">
 		<a-assets>
-			<img id="pink" src="https://img.gs/bbdkhfbzkk/stretch/http://i.imgur.com/1hyyIUi.jpg" crossorigin="anonymous" />
-			<img src="https://img.gs/bbdkhfbzkk/stretch/https://i.imgur.com/25P1geh.png" id="grid" crossorigin="anonymous">
-			<img src="https://img.gs/bbdkhfbzkk/2048x1024,stretch/http://i.imgur.com/WMNH2OF.jpg" id="chrome" crossorigin="anonymous">
-			<img id="sky" src="https://img.gs/bbdkhfbzkk/2048x2048,stretch/http://i.imgur.com/WqlqEkq.jpg" crossorigin="anonymous" />
+			<img id="pink" src="images/pink.jpg" crossorigin="anonymous" />
+			<img src="images/grid.png" id="grid" crossorigin="anonymous">
+			<img src="images/chrome.jpg" id="chrome" crossorigin="anonymous">
+			<img id="sky" src="images/sky.jpg" crossorigin="anonymous" />
 			<a-mixin id="shiny" material="color: pink; metalness:1; roughness: 0.1; sphericalEnvMap: #sky;"></a-mixin>
 			<a-mixin id="net"   material="color: pink; shader: flat; wireframe: true;"></a-mixin>
 			<a-mixin id="matte" material="color: darkmagenta; metalness:0.75; roughness: 0.5; sphericalEnvMap: #sky;"></a-mixin>
@@ -56,7 +56,7 @@ minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<a-camera
 			universal-controls
 			fire-item="el: #projectile; on: clap;"
-			clapper="debounce: false; trigger: 0.4;"
+			clapper="debounce: false; trigger: 0.85;"
 		">
 			<!-- Stop balls bouncing back into the camera by putting the camera in an invisible cylinder -->
 			<a-entity
